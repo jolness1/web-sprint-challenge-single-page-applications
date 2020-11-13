@@ -21,7 +21,7 @@ export default function PizzaForm(props) {
                 <button disabled={disabled}>submit</button>
                 <div className="errors">
                     <div>{errors.name}</div>
-                    <div>{errors.crust}</div>
+                    <div>{errors.size}</div>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@ export default function PizzaForm(props) {
 
                 <label>
                     Pie Size
-                    <select onChange={onChange} value={values.crust} name="crust">
+                    <select onChange={onChange} value={values.crust} name="size">
                         <option value="">- Select an option -</option>
                         <option value="child">Child</option>
                         <option value="small">Small</option>
@@ -52,14 +52,18 @@ export default function PizzaForm(props) {
                         <option value="large">Large</option>
                     </select>
                 </label>
+            </div>
 
                 {/* Checkboxes for Toppings */}
+
+                <div className="form-group checkboxes">
+                <h4>Toppings</h4>
 
                 <label>
                     Pinapple (It DOES go on Pizza)
                      <input
                         type="checkbox"
-                        name="Pineapple"
+                        name="pineapple"
                         checked={values.pineapple}
                         onChange={onChange}
                         />
