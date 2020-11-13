@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Pizza from "./Pizza";
 import PizzaForm from "./PizzaForm";
 import schema from "./FormSchema";
 import axios from "axios";
@@ -31,28 +32,15 @@ export default function App() {
   const [formValues, setFormValues] = useState(initialFormValues); // object
   const [formErrors, setFormErrors] = useState(initialFormErrors); // object
   const [disabled, setDisabled] = useState(initialDisabled); // boolean
-
-
-////////// Axios
-  ///////////////Get
-  const getPizza = () => {
-    axios
-      .get("https://reqres.in/api/users?page=2")
-      .then((res) => {
-        console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+  
   ////////// Axios
   ///////////////Post
-
+  ////////// Axios
   const postNewPizza = (newPizza) => {
     axios
-    .post("https://reqres.in/api/users?page=2", newPizza)
+    .post("https://reqres.in/api/users", newPizza)
     .then((res) => {
+      console.log(newPizza);
       setpizza([res.data.data, ...pizza]);
       setFormValues(initialFormValues);
     })
@@ -60,6 +48,21 @@ export default function App() {
       console.log(err);
     });
   };
+  
+  ///////////////Get
+  const getPizza = () => {
+    axios
+    .get("https://reqres.in/api/users")
+    .then((res) => {
+      debugger;
+      // console.log(res.data.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
+  
+  
 
   const inputChange = (name, value) => {
     yup
@@ -74,7 +77,7 @@ export default function App() {
       .catch((err) => {
         setFormErrors({
           ...formErrors,
-          [name]: err.erros[0],
+          [name]: err.errors[0],
         })
       })
       setFormValues({
@@ -122,6 +125,7 @@ export default function App() {
       />
 
       {pizza.map((pizza) => {
+        console.log(pizza.id)
         return <Pizza key={pizza.id} details={pizza} />;
       })}
 
